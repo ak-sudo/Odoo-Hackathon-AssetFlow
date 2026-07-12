@@ -1,73 +1,104 @@
-import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import generateToken from "../utils/generateToken.js";
+const bcrypt =require("bcryptjs");
+const db  =  require("../config/db.js");
+const generateToken  =  require("../utils/generateToken.js");
 
-// Register user
-export const register = async (req, res) => {
-  try {
-    const { name, email, password, role } = req.body;
+// Register User
+const register = async (req, res) => {
 
-    const exists = await User.findOne({ email });
+    const { name, email, password, confirmPassword } = req.body;
 
-    if (exists) {
-      return res.status(400).json({
-        message: "User already exists",
-      });
+    if (password !== confirmPassword) {
+        return res.status(400).json({
+            message: "Passwords do not match"
+        });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    db.query(
+        "SELECT * FROM users WHERE email=?",
+        [email],
+        async (err, result) => {
 
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-    });
+            if (err)
+                return res.status(500).json({ message: err.message });
 
-    res.status(201).json({
-      message: "User Registered",
-      token: generateToken(user._id),
-      user,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
-};
+            if (result.length > 0) {
+                return res.status(400).json({
+                    message: "User already exists"
+                });
+            }
 
-// login user 
-export const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+            const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.findOne({ email });
+            db.query(
+                "INSERT INTO users(name,email,password) VALUES(?,?,?)",
+                [name, email, hashedPassword],
+                (err, result) => {
 
-    if (!user) {
-      return res.status(400).json({
-        message: "Invalid Credentials",
-      });
-    }
+                    if (err)
+                        return res.status(500).json({
+                            message: err.message
+                        });
 
-    const isMatch = await bcrypt.compare(
-      password,
-      user.password
+                    res.status(201).json({
+                        message: "Registration Successful",
+                        token: generateToken(result.insertId)
+                    });
+
+                }
+            );
+
+        }
     );
 
-    if (!isMatch) {
-      return res.status(400).json({
-        message: "Invalid Credentials",
-      });
-    }
+};
 
-    res.json({
-      message: "Login Successful",
-      token: generateToken(user._id),
-      user,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+// Login User
+
+const login = (req, res) => {
+
+    const { email, password } = req.body;
+
+    db.query(
+        "SELECT * FROM users WHERE email=?",
+        [email],
+        async (err, result) => {
+
+            if (err)
+                return res.status(500).json({
+                    message: err.message
+                });
+
+            if (result.length === 0) {
+                return res.status(400).json({
+                    message: "Invalid Credentials"
+                });
+            }
+
+            const user = result[0];
+
+            const match = await bcrypt.compare(
+                password,
+                user.password
+            );
+
+            if (!match) {
+                return res.status(400).json({
+                    message: "Invalid Credentials"
+                });
+            }
+
+            res.json({
+                message: "Login Successful",
+                token: generateToken(user.id),
+                user
+            });
+
+        }
+    );
+
+};
+
+module.exports = {
+    register,
+    login
 };
