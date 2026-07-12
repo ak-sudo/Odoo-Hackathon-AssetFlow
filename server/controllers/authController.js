@@ -2,6 +2,8 @@ const bcrypt =require("bcryptjs");
 const db  =  require("../config/db.js");
 const generateToken  =  require("../utils/generateToken.js");
 
+
+
 // Register User
 const register = async (req, res) => {
 
@@ -57,6 +59,7 @@ const register = async (req, res) => {
 const login = (req, res) => {
 
     const { email, password } = req.body;
+    console.log(req.body)
 
     db.query(
         "SELECT * FROM users WHERE email=?",
