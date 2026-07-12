@@ -3,14 +3,19 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import Login from './components/login'
+import Login from "./pages/Login";
+import Dashboard from './pages/dashboard'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <Login/>
-  )
+  return <Login />;
 }
+
+// function App() {
+//   const [count, setCount] = useState(0)
+
+//   return (
+//     <Login/>
+//   )
+// }
 
 export default App
