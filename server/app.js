@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-
+import authRoutes from "./Routes/authRoutes"
 
 const app = express();
 
@@ -12,5 +12,7 @@ app.get("/", (req, res) => {
         message: "AssetFlow API Running"
     });
 });
+
+app.use("/app/auth",authRoutes)
 
 export default app;
