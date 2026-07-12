@@ -1,6 +1,6 @@
-import express from "express";
-import cors from "cors";
-import authRoutes from "./Routes/authRoutes"
+const express =  require( "express");
+const cors =  require( "cors");
+const authRoutes =  require("./Routes/authRoutes")
 
 const app = express();
 
@@ -15,4 +15,4 @@ app.get("/", (req, res) => {
 
 app.use("/app/auth",authRoutes)
 
-export default app;
+module.exports= app;
