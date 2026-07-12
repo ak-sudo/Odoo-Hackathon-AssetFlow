@@ -11,6 +11,8 @@ export default function Login() {
   const [passwordError, setPasswordError] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
+  const [backendMessage, setBackendMessage] = useState("");
+  const [showBackendMessage, setShowBackendMessage] = useState(false);
 
   const validate = () => {
     let valid = true;
@@ -44,7 +46,21 @@ export default function Login() {
     e.preventDefault();
 
     if (validate()) {
-      const res = await axios.post('http://localhost:3000/app/auth/login',{email,password})
+      try {
+        const res = await axios.post('http://localhost:3000/app/auth/login', { email, password });
+        const msg = res?.data?.message || "Login successful";
+        setBackendMessage(msg);
+        setShowBackendMessage(true);
+        setTimeout(() => setShowBackendMessage(false), 4000);
+
+        // write code to redirect to dashboard page
+        
+      } catch (err) {
+        const msg = err?.response?.data?.message || "An error occurred";
+        setBackendMessage(msg);
+        setShowBackendMessage(true);
+        setTimeout(() => setShowBackendMessage(false), 6000);
+      }
     }
   };
 
@@ -147,6 +163,14 @@ export default function Login() {
           Sign In to AssetFlow
         </button>
       </form>
+      {/* Backend message (bottom center) */}
+      {showBackendMessage && (
+        <div className="fixed left-1/2 bottom-6 -translate-x-1/2 z-50">
+          <div className="rounded-md bg-[#111827]/90 text-white px-4 py-2 shadow-lg">
+            {backendMessage}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
