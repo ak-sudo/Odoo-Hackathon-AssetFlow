@@ -8,9 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.json({
-        message: "AssetFlow API Running"
-    });
+    console.log("AAgya bey")
 });
 
 app.use("/app/auth",authRoutes)

@@ -15,7 +15,11 @@ import Maintenance from './pages/maintenance'
 import Signup from './pages/Signup'
 
 function App() {
+<<<<<<< HEAD
   return <Dashboard />;
+=======
+  return <Login />;
+>>>>>>> e5fd6ff338ffdacfb6d6759034489172b66bd560
 }
 
 // function App() {
