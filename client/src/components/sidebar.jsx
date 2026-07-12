@@ -28,7 +28,7 @@ export default function Sidebar() {
   return (
     <aside className="flex h-screen w-64 flex-col border-r bg-white">
 
-      <img src={Logo} alt="AssetFlow" className="w-24 h-auto mb-4"/>  
+      <img src={Logo} alt="AssetFlow" className="w-24 h-auto"/>  
 
       <div className="flex-1 mt-4">
 

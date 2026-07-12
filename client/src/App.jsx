@@ -12,9 +12,10 @@ import Allocation from './pages/allocation'
 import Organization from './pages/Organiztion'
 import Reports from './pages/reports'
 import Maintenance from './pages/maintenance'
+import Signup from './pages/Signup'
 
 function App() {
-  return <Maintenance />;
+  return <Dashboard />;
 }
 
 // function App() {
