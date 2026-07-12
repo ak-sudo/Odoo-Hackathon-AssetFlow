@@ -15,17 +15,17 @@ reallocation across departments.
 Large organizations often manage assets using spreadsheets, disconnected
 systems, and manual records. This can lead to:
 
--   Poor asset visibility
--   Untracked or misplaced assets
--   Underutilized resources
--   Unnecessary procurement
--   Inefficient asset allocation
--   Difficulty tracking asset lifecycle and maintenance
+- Poor asset visibility
+- Untracked or misplaced assets
+- Underutilized resources
+- Unnecessary procurement
+- Inefficient asset allocation
+- Difficulty tracking asset lifecycle and maintenance
 
 AssetFlow provides a unified platform for managing the complete asset
 lifecycle.
 
-``` text
+```text
 Asset Registration
         ↓
 Department / Employee Assignment
@@ -43,17 +43,17 @@ Maintenance / Retirement
 
 ## Core Features
 
--   Centralized asset registry
--   Employee and department management
--   Asset assignment and transfer tracking
--   Asset status and lifecycle management
--   Utilization tracking
--   Procurement request management
--   AI-based asset reallocation recommendations
--   Procurement optimization
--   Asset analytics dashboard
--   Predictive asset insights
--   Role-based access control
+- Centralized asset registry
+- Employee and department management
+- Asset assignment and transfer tracking
+- Asset status and lifecycle management
+- Utilization tracking
+- Procurement request management
+- AI-based asset reallocation recommendations
+- Procurement optimization
+- Asset analytics dashboard
+- Predictive asset insights
+- Role-based access control
 
 ## Main USP
 
@@ -68,7 +68,7 @@ A department requests **20 laptops**.
 
 AssetFlow analyzes the organization's assets and finds:
 
-``` text
+```text
 8 idle laptops       → CSE Department
 6 unused laptops     → HR Department
 2 available laptops  → Finance Department
@@ -76,7 +76,7 @@ AssetFlow analyzes the organization's assets and finds:
 
 AssetFlow recommends:
 
-``` text
+```text
 Reallocate: 16 laptops
 Purchase:    4 laptops
 ```
@@ -88,35 +88,35 @@ resource utilization.
 
 ### Frontend
 
--   React.js
--   Vite
--   Tailwind CSS
--   Lucide React
--   Axios
+- React.js
+- Vite
+- Tailwind CSS
+- Lucide React
+- Axios
 
 ### Backend
 
--   Node.js
--   Express.js
--   MySQL
--   mysql2
+- Node.js
+- Express.js
+- MySQL
+- mysql2
 
 ### AI Service
 
--   Python
--   FastAPI
--   Scikit-learn / XGBoost
+- Python
+- FastAPI
+- Scikit-learn / XGBoost
 
 ### Development Tools
 
--   Git
--   GitHub
--   Postman
--   VS Code
+- Git
+- GitHub
+- Postman
+- VS Code
 
 ## Project Directory Structure
 
-``` text
+```text
 AssetFlow/
 │
 ├── client/                         # React frontend
@@ -189,7 +189,7 @@ AssetFlow/
 
 ## System Architecture
 
-``` text
+```text
 ┌─────────────────────┐
 │    React Frontend   │
 │  Vite + Tailwind    │
@@ -223,26 +223,26 @@ FastAPI AI service.
 
 The initial database design includes:
 
--   `users`
--   `departments`
--   `assets`
--   `asset_assignments`
--   `asset_transfers`
--   `procurement_requests`
--   `maintenance_records`
+- `users`
+- `departments`
+- `assets`
+- `asset_assignments`
+- `asset_transfers`
+- `procurement_requests`
+- `maintenance_records`
 
 ## Getting Started
 
 ### 1. Clone the repository
 
-``` bash
+```bash
 git clone <repository-url>
 cd AssetFlow
 ```
 
 ### 2. Install frontend dependencies
 
-``` bash
+```bash
 cd client
 npm install
 npm run dev
@@ -250,7 +250,7 @@ npm run dev
 
 ### 3. Install backend dependencies
 
-``` bash
+```bash
 cd server
 npm install
 npm run dev
@@ -260,7 +260,7 @@ npm run dev
 
 Create a `.env` file inside the `server` directory.
 
-``` env
+```env
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
@@ -274,13 +274,13 @@ Never commit the `.env` file to GitHub.
 
 ### 5. Create the MySQL database
 
-``` sql
+```sql
 CREATE DATABASE assetflow;
 ```
 
 ### 6. Start the AI service
 
-``` bash
+```bash
 cd ai-service
 pip install -r requirements.txt
 uvicorn main:app --reload
@@ -292,7 +292,7 @@ The project is developed collaboratively by a team of three.
 
 Recommended branches:
 
-``` text
+```text
 main
 │
 ├── frontend
@@ -305,7 +305,7 @@ requests before merging changes into `main`.
 
 Example:
 
-``` bash
+```bash
 git switch frontend
 git pull origin frontend
 
@@ -318,7 +318,7 @@ git push origin frontend
 
 Use clear commit messages:
 
-``` text
+```text
 feat: add asset registration API
 fix: resolve login validation issue
 ui: improve dashboard responsiveness
@@ -330,34 +330,34 @@ docs: update project README
 
 ### Phase 1
 
--   Authentication
--   Employee accounts
--   Department management
--   Asset registry
--   Asset assignment
+- Authentication
+- Employee accounts
+- Department management
+- Asset registry
+- Asset assignment
 
 ### Phase 2
 
--   Asset transfer workflow
--   Utilization tracking
--   Procurement requests
--   Analytics dashboard
+- Asset transfer workflow
+- Utilization tracking
+- Procurement requests
+- Analytics dashboard
 
 ### Phase 3
 
--   AI utilization analysis
--   Asset reallocation engine
--   Procurement intelligence
--   Predictive asset insights
+- AI utilization analysis
+- Asset reallocation engine
+- Procurement intelligence
+- Predictive asset insights
 
 ## Team
 
 AssetFlow is being developed collaboratively by a three-member team
 focusing on:
 
--   Frontend and UI/UX
--   Backend and database
--   AI and resource intelligence
+- Frontend and UI/UX
+- Backend and database
+- AI and resource intelligence
 
 ## Project Status
 
@@ -371,7 +371,7 @@ registry, backend architecture, and MySQL database integration.
 This project is intended for development, learning, and hackathon
 purposes. Licensing details may be updated as the project evolves.
 
-------------------------------------------------------------------------
+---
 
 **AssetFlow --- Track assets. Optimize resources. Reduce unnecessary
 procurement.**
