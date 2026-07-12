@@ -1,24 +1,43 @@
-import { useNavigate } from "react-router-dom";
+import Logo from "../assets/logo-light.png";
 
-export default function Landing() {
-  const navigate = useNavigate();
-
+export default function Landing({ onSignIn }) {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-[#F8F8F8]">
-      <img src="/logo.png" alt="logo" className="w-28 mb-6" />
+    <div className="flex min-h-screen items-center justify-center bg-[#F8F8F8] px-4">
+      <div className="w-36rem max-w-xl rounded-2xl border border-[#E5E0D8] bg-white p-10 shadow-lg">
 
-      <h1 className="text-4xl font-bold text-[#748873]">AssetFlow</h1>
+        {/* Logo */}
+        <div className="flex justify-center">
+          <img
+            src={Logo}
+            alt="AssetFlow"
+            className="h-24 w-auto"
+          />
+        </div>
 
-      <p className="text-center text-gray-600 max-w-md mt-4">
-        Manage, track, allocate and maintain organizational assets.
-      </p>
+        {/* Title */}
+        <div className="mt-6 text-center">
 
-      <button
-        onClick={() => navigate("/login")}
-        className="mt-8 bg-[#748873] hover:bg-[#647763] text-white px-8 py-3 rounded-lg"
-      >
-        Sign In
-      </button>
+          <p className="mt-4 text-lg text-gray-600">
+            Enterprise Asset Management System
+          </p>
+
+          <p className="mt-3 leading-7 text-gray-500">
+            Streamline asset allocation, booking through one secure,
+            centralized platform.
+          </p>
+        </div>
+
+        {/* Button */}
+        <div className="mt-10">
+          <button
+            onClick={onSignIn}
+            className="w-full rounded-lg bg-[#748873] py-3 text-lg font-semibold text-white transition hover:bg-[#667965]"
+          >
+            Sign In
+          </button>
+        </div>
+
+      </div>
     </div>
   );
 }

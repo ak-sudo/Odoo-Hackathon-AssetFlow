@@ -8,10 +8,6 @@ export default function Navbar() {
   return (
     <nav className="flex h-16 items-center justify-between border-b bg-white px-8 shadow-sm">
 
-      <div className="flex items-center gap-3">
-        <img src={Logo} alt="AssetFlow" className="h-10" />
-      </div>
-
       <div className="relative">
 
         <button
