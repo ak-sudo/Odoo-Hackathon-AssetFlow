@@ -1,14 +1,66 @@
-const express  =  require("express");
+const db = require("../config/db");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const {
-  register,
-  login,
-}  = require("../controllers/authController.js");
+const register = async (req, res) => {
+    try {
 
-const router = express.Router();
+        const { name, email, password, confirmPassword } = req.body;
 
-router.post("/register", register);
+        if (!name || !email || !password || !confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
 
-router.post("/login", login);
+        if (password !== confirmPassword) {
+            return res.status(400).json({
+                success: false,
+                message: "Passwords do not match"
+            });
+        }
 
-module.exports = router;
+        const [existingUser] = await db.query(
+            "SELECT * FROM users WHERE email = ?",
+            [email]
+        );
+
+        if (existingUser.length > 0) {
+            return res.status(400).json({
+                success: false,
+                message: "User already exists"
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const [result] = await db.query(
+            "INSERT INTO users(name,email,password) VALUES(?,?,?)",
+            [name, email, hashedPassword]
+        );
+
+        const token = jwt.sign(
+            { id: result.insertId },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Registration Successful",
+            token
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};
+
+module.exports.register = register;
+

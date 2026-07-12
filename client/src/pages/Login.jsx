@@ -24,7 +24,7 @@ export default function Login() {
     }
 
     const passwordRegex =
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+      /@/;
 
     if (!passwordRegex.test(password)) {
       setPasswordError("Password does not meet security requirements.");
