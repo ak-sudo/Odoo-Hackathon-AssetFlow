@@ -53,6 +53,7 @@ const register = async (req, res) => {
 
         const token = generateToken(result.insertId);
 
+
         return res.status(201).json({
             message: "Registration Successful",
             token,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import Logo from "../assets/logo-light.png";
+import axios from 'axios'
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,9 @@ export default function Signup() {
     confirmPassword: "",
     role: "Employee",
   });
+
+  const [backendMessage, setBackendMessage] = useState("");
+  const [showBackendMessage, setShowBackendMessage] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -54,8 +58,7 @@ export default function Signup() {
       valid = false;
     }
 
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    const passwordRegex = /@/;
 
     if (!passwordRegex.test(formData.password)) {
       newErrors.password =
@@ -73,25 +76,31 @@ export default function Signup() {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
-    /*
-      Backend Placeholder
+    if (validate()) {
+      try {
+        const res = await axios.post(
+          "http://localhost:3000/app/auth/register",
+          formData
+        );
+        const msg = res?.data?.message || "Signup successful";
+        setBackendMessage(msg);
+        setShowBackendMessage(true);
+        setTimeout(() => setShowBackendMessage(false), 4000);
 
-      POST /signup
-
-      {
-        name,
-        email,
-        password,
-        role: "Employee"
+        // write code to redirect to dashboard page
+      } catch (err) {
+        const msg = err?.response?.data?.message || "An error occurred";
+        setBackendMessage(msg);
+        setShowBackendMessage(true);
+        setTimeout(() => setShowBackendMessage(false), 6000);
       }
-    */
+    }
 
-    console.log(formData);
   };
 
   return (
@@ -101,16 +110,9 @@ export default function Signup() {
         className="w-full max-w-md rounded-2xl border border-[#E5E0D8] bg-white p-8 shadow-lg"
       >
         <div className="flex flex-col items-center">
-          <img
-            src={Logo}
-            alt="AssetFlow"
-            className="w-24 mb-4"
-          />
+          <img src={Logo} alt="AssetFlow" className="w-24 mb-4" />
 
-          <h1 className="text-3xl font-bold text-[#748873]">
-            Create Account
-          </h1>
-
+          <h1 className="text-3xl font-bold text-[#748873]">Create Account</h1>
         </div>
 
         <div className="mt-8">
@@ -220,7 +222,15 @@ export default function Signup() {
         >
           Create Account
         </button>
-      </form>
+      </form>{" "}
+      {/* Backend message (bottom center) */}
+      {showBackendMessage && (
+        <div className="fixed left-1/2 bottom-6 -translate-x-1/2 z-50">
+          <div className="rounded-md bg-[#111827]/90 text-white px-4 py-2 shadow-lg">
+            {backendMessage}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
