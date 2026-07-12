@@ -14,7 +14,7 @@ import Reports from './pages/reports'
 import Maintenance from './pages/maintenance'
 
 function App() {
-  return <Maintenance />;
+  return <Login />;
 }
 
 // function App() {

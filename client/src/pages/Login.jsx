@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import Logo from "../assets/logo-light.png";
+import axios from 'axios'
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -23,6 +24,9 @@ export default function Login() {
       setEmailError("");
     }
 
+    // const passwordRegex =
+    //   /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
     const passwordRegex =
       /@/;
 
@@ -36,11 +40,11 @@ export default function Login() {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (validate()) {
-      console.log("Call Login API");
+      const res = await axios.post('http://localhost:3000/app/auth/login',{email,password})
     }
   };
 
