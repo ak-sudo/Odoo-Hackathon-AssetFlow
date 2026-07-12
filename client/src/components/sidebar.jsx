@@ -9,6 +9,8 @@ import {
   BarChart3,
   LogOut,
 } from "lucide-react";
+import Logo from "../assets/logo-light.png";
+
 
 export default function Sidebar() {
 
@@ -26,9 +28,7 @@ export default function Sidebar() {
   return (
     <aside className="flex h-screen w-64 flex-col border-r bg-white">
 
-      <div className="border-b p-6 text-center text-2xl font-bold text-[#748873]">
-        AssetFlow
-      </div>
+      <img src={Logo} alt="AssetFlow" className="w-24 h-auto mb-4"/>  
 
       <div className="flex-1 mt-4">
 
